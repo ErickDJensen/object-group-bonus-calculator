@@ -44,34 +44,63 @@ const employees = [
 
 //You are going to write a single JavaScript file to automatically calculate employee bonus for a company.
 //Write a declared function that takes in one **Employee** object (as an argument to the function), and returns a new **object** with the following properties:
-
-let newArray = [];
-
-
-
-  // let newObject = {
-  //   Name : employees[0].name,
-  //   bonusPercentage : 0.04,
-  //   totalCompensation :(1.04 * (employees[0].annualSalary)),
-  //   totalBonus : (0.04 * (employees[0].annualSalary))
-  // }
-
-function newInformation(employee){
-  let Name = employee.name;
-   let bonusPercentage=0;
-   let totalCompensation=0;
-   let totalBonus = 0;
+//console log will be replaced by the funcion
+for (let index = 0; index < employees.length; index++) {
+  console.log(newInformation(employees[index]));
   
-  if (employees[i].reviewRating <= 2){
-    bonusPercentage=0;
-  }else if(employees[i].reviewRating === 3){
-    bonusPercentage=.04;
-  }else if (employees[i].reviewRating === 4){
-    bonusPercentage=.06;
-  }else if(employees[i].reviewRating === 5){
-    bonusPercentage=.1;
-  }
+}
 
+//this function takes in an object and returns an object
+function newInformation(employee){
+  let bonusPercentage = 0;
+  let totalCompensation = 0;
+  let totalBonus = 0;
+
+//logics for rating
+if(employee.reviewRating <= 2){
+  bonusPercentage = 0;
+}else if(employee.reviewRating === 3){
+  bonusPercentage = 0.04;
+}else if(employee.reviewRating === 4){
+  bonusPercentage = 0.06;
+}else if(employee.reviewRating === 5){
+  bonusPercentage = 0.1;
+}
+
+//logics for employee number length
+if(employee.employeeNumber.length === 4){
+  bonusPercentage += .05;
+}
+
+//logic for annual income
+if(Number(employee.annualSalary) >= 65000){
+  bonusPercentage -= .01;
+}
+
+//logic for adjusted bonus over 13%
+if(bonusPercentage > .13){
+  bonusPercentage = .13;
+}
+
+//logic
+if(bonusPercentage < 0){
+  bonusPercentage = 0;
+}
+
+//calculating
+totalBonus = bonusPercentage * Number(employee.annualSalary);
+totalCompensation = Number(employee.annualSalary) + totalBonus;
+
+
+
+let calculatedBonus = {
+  name: employee.name,
+  bonusPercentage: bonusPercentage,
+  totalCompensation: totalCompensation,
+  totalBonus: totalBonus
+}
+return calculatedBonus
+}//end of function
 
 
 
